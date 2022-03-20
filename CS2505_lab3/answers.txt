@@ -1,0 +1,8 @@
+I didn't run into very many issues during this lab. To find the format of an HTTP request I used curl with the verbose flag, which outputs all headers. I don't think all of them are technically necessary, but it doesn't hurtto include them.
+
+Then I adapted the sockets code I used in Lab 2 to connect based on cli arguments and receive until it saw the HTML closing tag, and finally print the response. 
+
+I did run into one issue while attempting to browse the actual web, which I was curious whether I could do. Sites (I used example.com for testing) would accept the connection, but I wouldn't receive a response. I also noticed that after a while, I'd get a connection timeout message. Going back to the curl output, I noticed a final newline char at the end of the request, which I hadn't been including, so anything I connected to would just be waiting for the end of my HTTP header. Once I included the closing newline (and thus began sending a properly formed HTTP request), sites started sending back HTML! Most sites don't work properly because the program doesn't understand redirects or the www subdomain, but very simple pages do work, example.com among them.
+It's pretty amazing to see the gears beneath the modern web, and to realize just how patched together all this is. Entire apps are being sent as plain text! Terrifying!
+
+Also, I set the user agent to IE 10. Sorry, sysadmins hoping to drop support.
